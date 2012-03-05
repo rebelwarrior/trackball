@@ -95,21 +95,22 @@ Section "InputClass"
 EndSection
 EOM
 
-zombie =  `locate xorg.conf.d | grep d$`
-zombie.chomp! #BRAINS!!
+#Finds the configuration directory
+xorgconfigdir =  `locate xorg.conf.d | grep d$`
+xorgconfigdir.chomp! 
 
-#How do I get tempdirectory?? 
+#Is there a way for Ruby to get the Temp directory automatically?
 tempdirectory = "/tmp"
 
 f = File.new((tempdirectory + "/50-marblemouse.conf"), "w")
 f.puts default_text
 f.close
 
-puts `echo #{zombie}`
+puts `echo #{xorgconfigdir}`
 
-if FileTest.exists?(zombie + "/50-marblemouse.conf")
-	File.open((zombie + "/50-marblemouse.conf"), 'r') do |file|
-     #this block is not iterating (confusing!) only opening the file
+if FileTest.exists?(xorgconfigdir + "/50-marblemouse.conf")
+	File.open((xorgconfigdir + "/50-marblemouse.conf"), 'r') do |file|
+     #btw this block is not iterating (confusing!) only opening & closing the file
      if (file.read  =~ /Section\s*\"InputClass\"/i) 
       @dont_append = true
      end
@@ -120,29 +121,29 @@ if FileTest.exists?(zombie + "/50-marblemouse.conf")
 		overwrite = gets
 		if (overwrite.to_s =~ /y/i) 
 			puts "Overwriting existing Trackball conf file."
-			puts `sudo cp /tmp/50-marblemouse.conf #{zombie}/50-marblemouse.conf`
+			puts `sudo cp /tmp/50-marblemouse.conf #{xorgconfigdir}/50-marblemouse.conf`
 		else
-			puts "Generated Config file is at /tmp/50-marblemouse.conf existing config file is at #{zombie}."
+			puts "Generated Config file is at /tmp/50-marblemouse.conf existing config file is at #{xorgconfigdir}."
 		end	
 	else 
 		puts "Trackball Conf file exits but doesn't contain Input Class.\nAppending Input Class to config file." 
-    #Hail Seitan! 666 -- Won't append the file without it.
-    puts `sudo chmod 666 #{zombie + "/50-marblemouse.conf"}`
-		puts `sudo cat #{tempdirectory + "/50-marblemouse.conf"} >> #{zombie + "/50-marblemouse.conf"}` 
-    puts `sudo chmod 644 #{zombie + "/50-marblemouse.conf"}`
+    #Change file permisions -- Won't append the file without it.
+    puts `sudo chmod 666 #{xorgconfigdir + "/50-marblemouse.conf"}`
+		puts `sudo cat #{tempdirectory + "/50-marblemouse.conf"} >> #{xorgconfigdir + "/50-marblemouse.conf"}` 
+    puts `sudo chmod 644 #{xorgconfigdir + "/50-marblemouse.conf"}`
 	end
 	
 else
 	puts "Config file doesn't exist. Creating one."
-  puts `sudo cp /tmp/50-marblemouse.conf #{zombie}/50-marblemouse.conf`
+  puts `sudo cp /tmp/50-marblemouse.conf #{xorgconfigdir}/50-marblemouse.conf`
 end
 
 
-#puts `sudo cp /tmp/50-marblemouse.conf #{zombie}/50-marblemouse.conf` 
+#puts `sudo cp /tmp/50-marblemouse.conf #{xorgconfigdir}/50-marblemouse.conf` 
 
 #else open marblemouse.conf check for section input and add new txt
 # try using append. How do I so a sudo write though?
-# `sudo echo '#{text}' >> #{zombie}/filename.txt`
+# `sudo echo '#{text}' >> #{xorgconfigdir}/filename.txt`
 # is there a way of loading the contents of txt to clipboard and open the file on text editor.
 #else puts "file is already there overwrite? (Y/N)" gets etc.
 
