@@ -5,13 +5,10 @@
 ###########################################
 
 
-#How do I get tempdirectory?? 
-tempdirectory = "/tmp"
-
 =begin
 ###########################################
-#Puts Small Left Button as Middle
-#     Right Left Buttton as Scroll
+#  Puts Small Left Button as Middle       #
+#     Right Left Buttton as Scroll        #
 ###########################################
 default_text = <<EOM
 Section "InputClass" 
@@ -36,10 +33,10 @@ EndSection
 EOM
 =end
 =begin
-###########################################
-#Puts Small Left Button as Middle, hold to Scroll
-#     Right Left Buttton as Forward
-###########################################
+####################################################
+# Puts Small Left Button as Middle, hold to Scroll #
+#     Right Left Buttton as Forward                #
+####################################################
 default_text = <<EOM
 Section "InputClass" 
   Identifier      "Marble Mouse" 
@@ -60,8 +57,8 @@ EOM
 =end
 =begin
 ###########################################
-#Puts Small Left Button as 
-#     Right Left Buttton as 
+#   Puts Small Left Button as             #
+#     Right Left Buttton as               #
 ###########################################
 default_text = <<EOM
 Section "InputClass"
