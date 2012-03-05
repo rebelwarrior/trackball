@@ -126,7 +126,7 @@ if FileTest.exists?(zombie + "/50-marblemouse.conf")
 		end	
 	else 
 		puts "Trackball Conf file exits but doesn't contain Input Class.\nAppending Input Class to config file." 
-    #Hail Seitan! 666 -- Won't cat the file without it.
+    #Hail Seitan! 666 -- Won't append the file without it.
     puts `sudo chmod 666 #{zombie + "/50-marblemouse.conf"}`
 		puts `sudo cat #{tempdirectory + "/50-marblemouse.conf"} >> #{zombie + "/50-marblemouse.conf"}` 
     puts `sudo chmod 644 #{zombie + "/50-marblemouse.conf"}`
