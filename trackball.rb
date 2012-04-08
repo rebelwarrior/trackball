@@ -84,7 +84,7 @@ Section "InputClass"
   MatchIsPointer  "on" 
   MatchDevicePath "/dev/input/event*" 
   Driver          "evdev" 
-  # Option          "SendCoreEvents" "true"
+  # Option "SendCoreEvents" "true"
   Option "Buttons"             "9" 
   Option "ButtonMapping"       "1 8 3 4 5 6 7 2 9" 
   Option "EmulateWheel"        "true"
@@ -96,7 +96,7 @@ EndSection
 EOM
 
 #Finds the configuration directory
-xorgconfigdir =  `locate xorg.conf.d | grep d$`
+xorgconfigdir = `locate xorg.conf.d | grep d$`
 xorgconfigdir.chomp! 
 
 #Finds the temp directory
@@ -109,32 +109,32 @@ f.close
 puts `echo #{xorgconfigdir}`
 
 if FileTest.exists?(xorgconfigdir + "/50-marblemouse.conf")
-	File.open((xorgconfigdir + "/50-marblemouse.conf"), 'r') do |file|
-     #btw this block is not iterating (confusing!) only opening & closing the file
-     if (file.read  =~ /Section\s*\"InputClass\"/i) 
+  File.open((xorgconfigdir + "/50-marblemouse.conf"), 'r') do |file|
+    #btw this block is not iterating (confusing!) only opening & closing the file
+    if (file.read  =~ /Section\s*\"InputClass\"/i) 
       @dont_append = true
-     end
-	end
+    end
+  end
  
-	if @dont_append
-		puts "Manual Action needed. \nTrackball config file exists with an Input Class already defined. \nOverwrite existing file? WARNING you may loose data! (Y/N)"
-		overwrite = gets
-		if (overwrite.to_s =~ /y/i) 
-			puts "Overwriting existing Trackball conf file."
-			puts `sudo cp /tmp/50-marblemouse.conf #{xorgconfigdir}/50-marblemouse.conf`
-		else
-			puts "Generated Config file is at /tmp/50-marblemouse.conf existing config file is at #{xorgconfigdir}."
-		end	
-	else 
-		puts "Trackball Conf file exits but doesn't contain Input Class.\nAppending Input Class to config file." 
+  if @dont_append
+    puts "Manual Action needed. \nTrackball config file exists with an Input Class already defined. \nOverwrite existing file? WARNING you may loose data! (Y/N)"
+    overwrite = gets
+    if (overwrite.to_s =~ /y/i) 
+      puts "Overwriting existing Trackball conf file."
+      puts `sudo cp /tmp/50-marblemouse.conf #{xorgconfigdir}/50-marblemouse.conf`
+    else
+      puts "Generated Config file is at /tmp/50-marblemouse.conf existing config file is at #{xorgconfigdir}."
+    end	
+  else 
+    puts "Trackball Conf file exits but doesn't contain Input Class.\nAppending Input Class to config file." 
     #Change file permisions -- Won't append the file without it.
     puts `sudo chmod 666 #{xorgconfigdir + "/50-marblemouse.conf"}`
-		puts `sudo cat #{tempdirectory + "/50-marblemouse.conf"} >> #{xorgconfigdir + "/50-marblemouse.conf"}` 
+    puts `sudo cat #{tempdirectory + "/50-marblemouse.conf"} >> #{xorgconfigdir + "/50-marblemouse.conf"}` 
     puts `sudo chmod 644 #{xorgconfigdir + "/50-marblemouse.conf"}`
-	end
+  end
 	
 else
-	puts "Config file doesn't exist. Creating one."
+  puts "Config file doesn't exist. Creating one."
   puts `sudo cp /tmp/50-marblemouse.conf #{xorgconfigdir}/50-marblemouse.conf`
 end
 
