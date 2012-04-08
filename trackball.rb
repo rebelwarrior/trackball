@@ -121,9 +121,9 @@ if FileTest.exists?(xorgconfigdir + "/50-marblemouse.conf")
     overwrite = gets
     if (overwrite.to_s =~ /y/i) 
       puts "Overwriting existing Trackball conf file."
-      puts `sudo cp /tmp/50-marblemouse.conf #{xorgconfigdir}/50-marblemouse.conf`
+      puts `sudo cp #{tempdirectory}/50-marblemouse.conf #{xorgconfigdir}/50-marblemouse.conf`
     else
-      puts "Generated Config file is at /tmp/50-marblemouse.conf existing config file is at #{xorgconfigdir}."
+      puts "Generated Config file is at #{tempdirectory}/50-marblemouse.conf existing config file is at #{xorgconfigdir}."
     end	
   else 
     puts "Trackball Conf file exits but doesn't contain Input Class.\nAppending Input Class to config file." 
@@ -135,6 +135,6 @@ if FileTest.exists?(xorgconfigdir + "/50-marblemouse.conf")
 	
 else
   puts "Config file doesn't exist. Creating one."
-  puts `sudo cp /tmp/50-marblemouse.conf #{xorgconfigdir}/50-marblemouse.conf`
+  puts `sudo cp #{tempdirectory}/50-marblemouse.conf #{xorgconfigdir}/50-marblemouse.conf`
 end
 
