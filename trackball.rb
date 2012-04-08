@@ -99,8 +99,8 @@ EOM
 xorgconfigdir =  `locate xorg.conf.d | grep d$`
 xorgconfigdir.chomp! 
 
-#Is there a way for Ruby to get the Temp directory automatically?
-tempdirectory = "/tmp"
+#Finds the temp directory
+tempdirectory = Dir.tmpdir()
 
 f = File.new((tempdirectory + "/50-marblemouse.conf"), "w")
 f.puts default_text
@@ -137,14 +137,4 @@ else
 	puts "Config file doesn't exist. Creating one."
   puts `sudo cp /tmp/50-marblemouse.conf #{xorgconfigdir}/50-marblemouse.conf`
 end
-
-
-#puts `sudo cp /tmp/50-marblemouse.conf #{xorgconfigdir}/50-marblemouse.conf` 
-
-#else open marblemouse.conf check for section input and add new txt
-# try using append. How do I so a sudo write though?
-# `sudo echo '#{text}' >> #{xorgconfigdir}/filename.txt`
-# is there a way of loading the contents of txt to clipboard and open the file on text editor.
-#else puts "file is already there overwrite? (Y/N)" gets etc.
-
 
