@@ -100,6 +100,7 @@ xorgconfigdir = `locate xorg.conf.d | grep d$`
 xorgconfigdir.chomp! 
 
 #Finds the temp directory
+require 'tmpdir'
 tempdirectory = Dir.tmpdir()
 
 f = File.new((tempdirectory + "/50-marblemouse.conf"), "w")
