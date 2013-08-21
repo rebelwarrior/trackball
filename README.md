@@ -13,3 +13,8 @@ After selecting and uncommenting the configuration wanted. Run this command:
     $ruby trackball.rb
 
 If the script finds a Marble Mouse config file present it will ask to overwrite this file interactively.
+
+**Licenses**
+
+MIT LICENSE &
+CopyLeft David Acevedo :attribuion appreciated, but not required.
