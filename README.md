@@ -1,4 +1,4 @@
-#Logitech's Marble Mouse Configuration for Ubuntu
+# Logitech's Marble Mouse Configuration for Ubuntu
 
 ![image](http://1.bp.blogspot.com/-Bq-3I9M3AFg/T1UYBbAYKrI/AAAAAAAAAXw/HGWTd_PCugc/s1600/images.jpeg)
 
